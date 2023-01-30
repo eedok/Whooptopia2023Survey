@@ -1571,6 +1571,61 @@ const answers = [
     "additional_comments": ""
   },
   {
+    "time": "2023/01/30 10:46:23 AM MST",
+    "class": "Pro",
+    "name": "TRASHBISS",
+    "frame_raw": "Meteor65",
+    "frame": "Meteor65",
+    "battery_size": "300 mah",
+    "battery_connector": "BT 2.0",
+    "battery_brand_raw": "Tattu 300s, tw 270s",
+    "battery_brand": "Tattu",
+    "battery_voltage": "4.35v",
+    "motors_raw": "Nbd 0802 18kv old golds, tw 603 21500kv",
+    "motor_brand": "NewBeeDrone",
+    "motor_stator": "0802",
+    "motor_kv": "18000",
+    "motor_scale_raw": "No throttle cap on nbds, 90 throttle cap on 603s",
+    "motor_scale": "No",
+    "motor_screws": "All Metal",
+    "props_raw": "Gemfan 1219 triblades",
+    "props": "Gemfan 1219 triblades",
+    "fc_raw": "Superbee elrs, betafpv elrs",
+    "fc_brand": "HappyModel",
+    "firmware_raw": "Betaflight",
+    "firmware": "Betaflight",
+    "esc_raw": "Bluejay 48k",
+    "esc_firmware": "BlueJay",
+    "esc_pwm": "48",
+    "external_vtx": "Happymodel OVX300",
+    "camera": "Runcam Nano 3",
+    "camera_angle": "35",
+    "camera_mount": "Custom 3D printed canopy style ",
+    "antenna": "Tinywhoop Smol",
+    "polarity": "RHCP",
+    "leds": "No",
+    "weight": "19.9",
+    "flight_mode": "Acro without crash recovery",
+    "rates": "Actual: RP; 240 center, 500 max, 0 expo, Y; 240 center, 530 max, 0.02 expo, .6 throttle mid, .2 throttle expo",
+    "cli_dump": "",
+    "goggles_raw": "Hdo2 with rapid fire module ",
+    "goggles": "Fatshark HDO2",
+    "vrx": "ImmersionRC Rapidfire",
+    "radio_raw": "Tx16s ",
+    "radio": "RadioMaster TX16S",
+    "control_link_raw": "Elrs 3.0 500hz",
+    "control_link": "ELRS",
+    "failsafes": "No",
+    "stick_ends": "Tiny tips yucca ",
+    "flight_style": "Thumbs",
+    "weight_savings": "Besides direct soldering, just making sure wires were short ",
+    "breakage": "Cameras",
+    "video_quality": "Clear",
+    "spotter": "Yes",
+    "velocidrone": "Yes, flew it more than just to learn the layout",
+    "additional_comments": "No antennas "
+  },
+  {
     "time": "2023/01/23 12:51:44 PM MST",
     "class": "Pro",
     "name": "WhimpyDog ",
@@ -3444,7 +3499,7 @@ const answers = [
 
 
 const charts = ["class", "frame","battery_size","battery_connector","battery_brand","battery_voltage","motor_brand","motor_stator","motor_kv","motor_scale","motor_screws","props","fc_brand","firmware","esc_firmware","esc_pwm", "external_vtx","camera","antenna","polarity","leds","weight","flight_mode","goggles","vrx","radio","control_link","failsafes","stick_ends","flight_style","video_quality","spotter","velocidrone"];
-const surveyQuestions = ["name", "frame_raw","battery_size","battery_brand_raw","battery_voltage","motors_raw","motor_scale_raw","motor_screws","props_raw","fc_raw","firmware_raw","esc_raw","external_vtx","camera","camera_angle","camera_mount","antenna","polarity","leds","weight","flight_mode","rates","cli_dump","goggles_raw","radio_raw","control_link_raw","failsafes","stick_ends","flight_style","weight_savings","breakage","video_quality","spotter","velocidrone","additional_comments"];
+const surveyQuestions = ["name", "frame_raw","battery_size","battery_connector","battery_brand_raw","battery_voltage","motors_raw","motor_scale_raw","motor_screws","props_raw","fc_raw","firmware_raw","esc_raw","external_vtx","camera","camera_angle","camera_mount","antenna","polarity","leds","weight","flight_mode","rates","cli_dump","goggles_raw","radio_raw","control_link_raw","failsafes","stick_ends","flight_style","weight_savings","breakage","video_quality","spotter","velocidrone","additional_comments"];
 let filters = [];
 
 
