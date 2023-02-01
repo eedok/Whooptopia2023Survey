@@ -6,27 +6,99 @@ import { Chart } from "react-google-charts";
 
 const pageStyles = {
   color: "#232129",
-  padding: 96,
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
+  /*
+  overflow: "clip",
+  height: "100vh"
+  */
 }
 
 const gridStyles = {
-  display: "grid",
-  "grid-template-columns": "repeat(3, 1fr)",
-  gap: "10px",
-  "grid-auto-rows": "minmax(100px, auto)"
+  display: "flex",
+  "justify-content": "space-between"
 }
 
 const summaryStyles = {
-  "grid-column": "1 / 3"
+  flex: "1 auto",
+  "height": "100vh",
+  "overflow-y": "scroll",
+  "scrollbar-width": "thin",
+  display: "grid",
+  "grid-template-columns": "50% 50%"
 }
 
 const pilotStyles = {
-  "grid-column": "3"
+  flex: "1 1 20%",
+  height: "100vh",
+  overflow: "scroll",
+  "scrollbar-width": "thin",
 }
 
-const surveyStyles = {
-  "grid-column": "4"
+const pilotListStyle = {
+  "list-style": "none"
+}
+
+let surveyStyles = {
+  "position": "fixed",
+  "background": "#C0C0C0",
+  padding: "10px",
+  width: "40vw",
+  left: "50%",
+  "margin-left": "-20vw",
+  top: "20%",
+  height: "80%",
+  "margin-top": "-100px",
+  "z-index": 20,
+  overflow: "scroll",
+  "scrollbar-width": "thin",
+}
+
+const resetStyle = {
+  "color": "white",
+  "background": "#dc3912",
+  "font-size": "1em",
+  "min-height": "35px"
+}
+
+const eliteButtonStyle = {
+  width: "95%",
+  "color": "white",
+  "background": "#0060df",
+  "font-size": "1em",
+  "font-weight": "bolder",
+  "min-height": "35px"
+}
+const proButtonStyle = {
+  width: "95%",
+  "color": "white",
+  "background": "#dc3912",
+  "font-size": "1em",
+  "font-weight": "bolder",
+  "min-height": "35px"
+}
+const advButtonStyle = {
+  width: "95%",
+  "color": "white",
+  "background": "#ff9900",
+  "font-size": "1em",
+  "font-weight": "bolder",
+  "min-height": "35px"
+}
+const hobButtonStyle = {
+  width: "95%",
+  "color": "white",
+  "background": "#990099",
+  "font-size": "1em",
+  "font-weight": "bolder",
+  "min-height": "35px"
+}
+const entButtonStyle = {
+  width: "95%",
+  "color": "white",
+  "background": "#109618",
+  "font-size": "1em",
+  "font-weight": "bolder",
+  "min-height": "35px"
 }
 
 const answers = [
@@ -441,7 +513,7 @@ const answers = [
     "firmware": "BetaFlight",
     "esc_raw": "blujay 0.18",
     "esc_firmware": "BlueJay",
-    "esc_pwm": "",
+    "esc_pwm": "96",
     "external_vtx": "TBS Unify Nano",
     "camera": "Tinywhoop pinch standard",
     "camera_angle": "40",
@@ -454,7 +526,7 @@ const answers = [
     "rates": "1.6, 0.4",
     "cli_dump": "https://drive.google.com/u/0/open?usp=forms_web&id=19AI5ugyZxQiRVYAMWo3-o7DQJlT2Q2uW",
     "goggles_raw": "rapidfire",
-    "goggles": "",
+    "goggles": "Orqa",
     "vrx": "ImmersionRC Rapidfire",
     "radio_raw": "tx16s",
     "radio": "RadioMaster TX16S",
@@ -3505,6 +3577,7 @@ let filters = [];
 
 const IndexPage = () => {
   const [filteredAnswers, updateAnswers] = useState(answers);
+  const [showSurvey, toggleSurvey] = useState(false);
 
   const chartEvents = [
     {
@@ -3594,23 +3667,41 @@ const IndexPage = () => {
       }
     }
   
-  return (<Chart
+  return (<div><Chart
     chartType="PieChart"
     id={chartKey}
     data={chartData}
     options={chartOptions}
     chartEvents={chartEvents}
-    width={"100%"}
+    width={"40vw"}
     height={"400px"}
-  />);
+  /></div>);
   }
 
   function RenderPilot(answer){
     if(answer["name"] === "Pilot Name")
       return "";
+      let pilotButtonStyle;
+    switch(answer["class"]) {
+      case "Elite":
+        pilotButtonStyle = eliteButtonStyle;
+        break;
+      case "Pro":
+        pilotButtonStyle = proButtonStyle;
+        break;
+      case "Advanced":
+        pilotButtonStyle = advButtonStyle;
+        break;
+      case "Hobbyist":
+        pilotButtonStyle = hobButtonStyle;
+        break;
+      default:
+        pilotButtonStyle = entButtonStyle;
+        break;
+    }
     return (<li><button onClick={() => {
       filterToPilot(answer["name"]);
-    }}>
+    }} style={pilotButtonStyle}>
       {answer["name"]}
     </button></li>);
   }
@@ -3620,12 +3711,16 @@ const IndexPage = () => {
     for(let i = 0; i < filters.length; i++) {
       if(filters[i][0] === "name") {
         filters.splice(i, 1);
+        toggleSurvey(false);
         found = true;
         break;
       }
     }
     if(!found)
+    {
       filters.push(["name",pilot]);
+      toggleSurvey(true);
+    }
     filtersUpdated();
   }
 
@@ -3660,33 +3755,41 @@ const IndexPage = () => {
 
   }
 
+  function renderSurvey () {
+    if(showSurvey === false)
+      return "";
+    else
+      return <div class="surveyArea" style={surveyStyles} >
+      <h1><button onClick={() => {
+        toggleSurvey(false);
+      }}>X</button> Survey Answers</h1>
+      {
+        renderAnswers()
+      }
+    </div>;
+  }
+
   return (
     <main style={pageStyles}>
+        <h1>Whooptopis 2023 Fleet Survey<button onClick={() => {
+          resetFilters();
+        }} style={resetStyle}>Reset Filters</button></h1>
       <div class="wrapper" style={gridStyles}>
         <div class="chartArea" style={summaryStyles}>
-          <button onClick={() => {
-          resetFilters();
-        }}>Reset Filters</button>
-          <h1>Summary</h1>
           {charts.map(chart => (
           RenderChart(chart)
           ))}
         </div>
         <div class="pilotArea" style={pilotStyles}>
           <h1>Pilots</h1>
-          <ul>
+          <ul style={pilotListStyle}>
           {filteredAnswers.map(answer => (
             RenderPilot(answer)
           ))}
           </ul>
         </div>
-        <div class="surveyArea" style={surveyStyles}>
-          <h1>Survey Answers</h1>
-          {
-            renderAnswers()
-          }
-        </div>
       </div>
+      {renderSurvey()}
     </main>
   )
 }
