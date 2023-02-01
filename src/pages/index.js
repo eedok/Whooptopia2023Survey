@@ -393,7 +393,7 @@ const answers = [
     "name": "Leviticus ",
     "frame_raw": "Meteor65",
     "frame": "Meteor65",
-    "battery_size": "Both ",
+    "battery_size": "Both",
     "battery_connector": "BT 2.0",
     "battery_brand_raw": "Tinywhoop and webleed",
     "battery_brand": "Mix",
@@ -3773,7 +3773,7 @@ const IndexPage = () => {
     const chartOptions = {
       title: filteredAnswers[0][chartKey].replace("(C)","")
     }
-    const chartData = [[chartKey, "Count"]];
+    const chartData = [];
     for(let i = 1; i < filteredAnswers.length; i++)
     {
       if(filteredAnswers[i][chartKey] === "")
@@ -3792,6 +3792,10 @@ const IndexPage = () => {
         chartData.push([filteredAnswers[i][chartKey], 1]);
       }
     }
+
+    chartData.sort((a,b) => b[1] - a[1]);
+
+    chartData.unshift([chartKey, "Count"]);
   
   return (<div><Chart
     chartType="PieChart"
